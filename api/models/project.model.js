@@ -34,7 +34,18 @@ const projectSchema = new Schema({
       message: 'Not a valid url'
     }
   },
-}, { timestamps: true })
+}, { 
+  timestamps: true,
+  toJSON: {
+    virtuals: true,
+    transform: function (doc, ret) {
+      delete ret.__v;
+      ret.id = ret._id;
+      delete ret._id;
+      return ret;
+    }
+  }
+})
 
 const Project = mongoose.model('Project', projectSchema);
 module.exports = Project;
