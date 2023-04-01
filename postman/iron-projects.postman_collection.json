@@ -10,30 +10,13 @@
 			"name": "Projects",
 			"item": [
 				{
-					"name": "Projects",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{BASE_API_URL}}/projects",
-							"host": [
-								"{{BASE_API_URL}}"
-							],
-							"path": [
-								"projects"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Project",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"Project 1\"\n}",
+							"raw": "{\n    \"title\": \"Project 1\",\n    \"description\": \"lalalalalallallalalallalalalala\",\n    \"githubUrl\": \"http://google.com\",\n    \"imageUrl\": \"http://google.com\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -54,6 +37,93 @@
 									"value": "",
 									"disabled": true
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Projects",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_API_URL}}/projects",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"projects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Project",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_API_URL}}/projects/6425dc474d9b665ec9",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"projects",
+								"6425dc474d9b665ec9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Project",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"lilililliil\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_API_URL}}/projects/6427e40c6b6e0cfe93920d",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"projects",
+								"6427e40c6b6e0cfe93920d"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Project",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_API_URL}}/projects/6425dc474d9b665ec9294958",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"projects",
+								"6425dc474d9b665ec9294958"
 							]
 						}
 					},
