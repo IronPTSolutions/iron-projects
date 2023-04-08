@@ -4,7 +4,7 @@ module.exports.create = (req, res, next) => {
   Comment.create({
     text: req.body.text,
     project: req.params.id,
-    author: "642f01f89976f8ca4da9be66", // TODO: add auth. req.user.id,
+    author: req.user.id,
   })
     .then((comment) => res.json(comment))
     .catch(next);

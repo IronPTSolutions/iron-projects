@@ -9,6 +9,15 @@ const studentSchema = new Schema(
       required: "Student name is required",
       minlength: [3, "Student name needs at least 3 chars"],
     },
+    email: {
+      type: String,
+      required: "Student email is required",
+      match: [/^\S+@\S+\.\S+$/, "Student email must be valid"],
+    },
+    confirm: {
+      type: Boolean,
+      default: false,
+    },
     username: {
       type: String,
       required: "Student username is required",
@@ -59,7 +68,7 @@ const studentSchema = new Schema(
     cohort: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Cohort",
-      // required: "Student cohort is required",
+      required: "Student cohort is required",
     },
   },
   {
@@ -94,6 +103,10 @@ studentSchema.pre("save", function (next) {
     next();
   }
 });
+
+studentSchema.methods.checkPassword = function (password) {
+  return bcrypt.compare(password, this.password);
+};
 
 studentSchema.virtual("projects", {
   ref: "Project",

@@ -1,22 +1,413 @@
 {
 	"info": {
-		"_postman_id": "3d710fc3-e2fb-42e5-90b5-c595e13ac300",
+		"_postman_id": "14b318ff-10a2-4100-99c3-ce7782c07017",
 		"name": "iron-projects",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "1194541"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Projects",
+			"name": "Students",
 			"item": [
 				{
-					"name": "Project",
+					"name": "Students",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_API_URL}}/students",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"Project 1\",\n    \"description\": \"lalalalalallallalalallalalalala\",\n    \"githubUrl\": \"http://google.com\",\n    \"imageUrl\": \"http://google.com\"\n}",
+							"raw": "{\n    \"imageUrl\": \"https://avatartodo.com/avatar.jpg\",\n    \"location\": \"Remote\",\n    \"email\": \"julio.garcia@ironhack.com\",\n    \"linkedinUrl\": \"https://linkedin.com/in/juliojgarciaperez\",\n    \"githubUrl\": \"https://github.com/juliojgarciaperez\",\n    \"bio\": \"no se pronunciar cohort\",\n    \"password\": \"12345678\",\n    \"username\": \"julio2\",\n    \"name\": \"Julio G\",\n    \"cohort\": \"64315547205fb182ac02d5b6\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_API_URL}}/students",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Confirm",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"imageUrl\": \"https://avatartodo.com/avatar.jpg\",\n    \"location\": \"Remote\",\n    \"linkedinUrl\": \"https://linkedin.com/in/juliojgarciaperez\",\n    \"githubUrl\": \"https://github.com/juliojgarciaperez\",\n    \"bio\": \"no se pronunciar cohort\",\n    \"password\": \"12345678\",\n    \"username\": \"julio\",\n    \"name\": \"Julio G\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_API_URL}}/students/64314a8f97c5fdaedf7e2288/confirm",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"students",
+								"64314a8f97c5fdaedf7e2288",
+								"confirm"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Student",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_API_URL}}/students/642f01f89976f8ca4da9be66",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"students",
+								"642f01f89976f8ca4da9be66"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Student",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Julio Garcia\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_API_URL}}/students/642f01f89976f8ca4da9be66",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"students",
+								"642f01f89976f8ca4da9be66"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Student",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_API_URL}}/students/642f01f89976f8ca4da9be66",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"students",
+								"642f01f89976f8ca4da9be66"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const token = pm.response.json().token",
+									"pm.collectionVariables.set(\"TOKEN\", token);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"julio1\",\n    \"password\": \"12345678\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_API_URL}}/login",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Projects",
+			"item": [
+				{
+					"name": "Comments",
+					"item": [
+						{
+							"name": "Comment",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"text\": \"awesome!\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_API_URL}}/projects/64315e4442cf7f5e050d6a11/comment",
+									"host": [
+										"{{BASE_API_URL}}"
+									],
+									"path": [
+										"projects",
+										"64315e4442cf7f5e050d6a11",
+										"comment"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Comment",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"text\": \"edit!\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_API_URL}}/projects/64315e4442cf7f5e050d6a11/comment/64315f75ae8551fa9d03a4e9",
+									"host": [
+										"{{BASE_API_URL}}"
+									],
+									"path": [
+										"projects",
+										"64315e4442cf7f5e050d6a11",
+										"comment",
+										"64315f75ae8551fa9d03a4e9"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Comment",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"text\": \"una mierda\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_API_URL}}/projects/642f09405666b203dee737cd/comment/64315f75ae8551fa9d03a4e9",
+									"host": [
+										"{{BASE_API_URL}}"
+									],
+									"path": [
+										"projects",
+										"642f09405666b203dee737cd",
+										"comment",
+										"64315f75ae8551fa9d03a4e9"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Likes",
+					"item": [
+						{
+							"name": "Like",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_API_URL}}/projects/642f09405666b203dee737cd/like",
+									"host": [
+										"{{BASE_API_URL}}"
+									],
+									"path": [
+										"projects",
+										"642f09405666b203dee737cd",
+										"like"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Project",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Project 1\",\n    \"description\": \"lalalalalallallalalallalalalala\",\n    \"githubUrl\": \"http://google.com\",\n    \"imageUrl\": \"http://google.com\",\n    \"module\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -65,13 +456,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_API_URL}}/projects/6425dc474d9b665ec9",
+							"raw": "{{BASE_API_URL}}/projects/64315e4442cf7f5e050d6a11",
 							"host": [
 								"{{BASE_API_URL}}"
 							],
 							"path": [
 								"projects",
-								"6425dc474d9b665ec9"
+								"64315e4442cf7f5e050d6a11"
 							]
 						}
 					},
@@ -80,6 +471,16 @@
 				{
 					"name": "Project",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PATCH",
 						"header": [],
 						"body": {
@@ -92,13 +493,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_API_URL}}/projects/6427e40c6b6e0cfe93920d",
+							"raw": "{{BASE_API_URL}}/projects/64315e4442cf7f5e050d6a11",
 							"host": [
 								"{{BASE_API_URL}}"
 							],
 							"path": [
 								"projects",
-								"6427e40c6b6e0cfe93920d"
+								"64315e4442cf7f5e050d6a11"
 							],
 							"query": [
 								{
@@ -114,16 +515,66 @@
 				{
 					"name": "Project",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_API_URL}}/projects/6425dc474d9b665ec9294958",
+							"raw": "{{BASE_API_URL}}/projects/64315e4442cf7f5e050d6a11",
 							"host": [
 								"{{BASE_API_URL}}"
 							],
 							"path": [
 								"projects",
-								"6425dc474d9b665ec9294958"
+								"64315e4442cf7f5e050d6a11"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cohorts",
+			"item": [
+				{
+					"name": "Cohorts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_API_URL}}/cohorts",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"cohorts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cohort",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_API_URL}}/cohorts/64315547205fb182ac02d5b6",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"cohorts",
+								"64315547205fb182ac02d5b6"
 							]
 						}
 					},
@@ -157,6 +608,11 @@
 			"key": "BASE_API_URL",
 			"value": "http://localhost:3001/api/v1",
 			"type": "string"
+		},
+		{
+			"key": "TOKEN",
+			"value": "",
+			"type": "default"
 		}
 	]
 }
