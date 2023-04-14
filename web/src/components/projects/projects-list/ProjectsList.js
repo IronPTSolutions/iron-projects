@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import projectsService from '../../../services/projects';
+import ProjectItem from '../project-item/ProjectItem';
 
 function ProjectsList() {
   const [projects, setProjects] = useState([]);
@@ -12,8 +13,13 @@ function ProjectsList() {
 
   return (
     <>
-      <h1>Projects List</h1>
-      {projects.map((project) => <div key={project.id}>{project.id}</div>)}
+      <div className="row g-2">
+          {projects.map((project) => (
+            <div className="col-md-3" key={project.id}>
+              <ProjectItem  project={project} />
+            </div>
+          ))}
+      </div>
     </>
   )
 }

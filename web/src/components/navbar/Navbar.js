@@ -20,6 +20,7 @@ function Navbar() {
         <div className="collapse navbar-collapse" id="navbarText">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item"><NavLink to="/" className={renderNavLinkClassName}>Home</NavLink></li>
+            <li className="nav-item"><NavLink to="/projects" className={renderNavLinkClassName}>Projects</NavLink></li>
           </ul>
           <ul className="navbar-nav mb-2 mb-lg-0">
             {(user?.email) ? (

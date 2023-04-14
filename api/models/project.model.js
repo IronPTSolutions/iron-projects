@@ -30,6 +30,7 @@ const projectSchema = new Schema(
         validator: isValidUrl,
         message: "Not a valid url",
       },
+      default: 'https://res.cloudinary.com/dd06mgqvn/image/upload/v1681490358/iron-projects/iron-projecs-image.png'
     },
     module: {
       type: Number,
@@ -42,6 +43,11 @@ const projectSchema = new Schema(
         ref: "Student",
       },
     ],
+    cohort: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Student",
+      required: 'Cohort is required'
+    }
   },
   {
     timestamps: true,

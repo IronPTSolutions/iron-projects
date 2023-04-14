@@ -8,15 +8,15 @@ import moment from 'moment';
 
 function StudentsForm() {
   // https://react-hook-form.com/get-started#Applyvalidation
-  const { register, handleSubmit, control, setError, formState: { errors } } = useForm({ mode: 'onBlur' });
+  const { register, handleSubmit, watch, control, setError, formState: { errors } } = useForm({ mode: 'onBlur' });
   const [serverError, setServerError] = useState(undefined);
   const navigate = useNavigate();
 
   const [cohorts, setCohorts] = useState([]);
-  const cohortSelectOptions = cohorts.map(cohort => ({ value: cohort.id, label: `${cohort.location} - ${moment(cohort.start).format('YY-MM')}` }))
+  const cohortSelectOptions = cohorts.map(cohort => ({ value: cohort.id, label: `${cohort.location} - ${moment(cohort.start).format('YY-MM')}` }));
+  console.debug(`Select cohort is: ${watch('cohort')}`);
 
   const onStudentSubmit = async (student) => {
-   
     try {
       setServerError(undefined);
       console.debug('Registering...')
@@ -202,6 +202,7 @@ function StudentsForm() {
                   inputRef={ref}
                   className={`form-control p-0 ${errors.cohort ? 'is-invalid' : ''}`}
                   options={cohortSelectOptions}
+                  // https://react-select.com/styles
                   styles={{
                     control: (baseStyles, state) => ({
                       ...baseStyles,
