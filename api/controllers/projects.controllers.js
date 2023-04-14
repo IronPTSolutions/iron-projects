@@ -2,13 +2,14 @@ const Project = require("../models/project.model");
 
 module.exports.list = (req, res, next) => {
   Project.find() // TODO: filters
-    .populate("comments")
+    .populate("comments authors cohort")
     .then((projects) => res.json(projects))
     .catch(next);
 };
 
 module.exports.create = (req, res, next) => {
   req.body.cohort = req.user.cohort;
+  req.body.authors = [req.user.id];
   Project.create(req.body)
     .then((project) => res.status(201).json(project))
     .catch(next);

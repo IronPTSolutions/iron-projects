@@ -45,7 +45,7 @@ const projectSchema = new Schema(
     ],
     cohort: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Student",
+      ref: "Cohort",
       required: 'Cohort is required'
     }
   },

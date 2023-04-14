@@ -15,7 +15,7 @@ function ProjectsList() {
     <>
       <div className="row g-2">
           {projects.map((project) => (
-            <div className="col-md-3" key={project.id}>
+            <div className="col-sm-6 col-md-4 col-lg-3 d-flex align-items-stretch" key={project.id}>
               <ProjectItem  project={project} />
             </div>
           ))}
