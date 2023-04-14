@@ -7,7 +7,7 @@ import logo from '../assets/img/logo.svg';
 
 function RegisterPage() {
   return (
-    <PageLayout title="Signup as student" >
+    <PageLayout title="Sign up as student" >
       <div className="row justify-content-center">
         <div className="col-12 col-md-6">
           <div className="max-auto mb-3 text-center">

@@ -11,8 +11,12 @@ function StudentsForm() {
 
   const onStudentSubmit = (student) => {
     setServerError(undefined);
+    console.log('Registering...')
     studentsService.create(student)
-      .then(student => navigate('/login', { state: { student } }))
+      .then(student => {
+        console.log(student);
+        navigate('/login', { state: { student } });
+      })
       .catch(error => {
         const errors = error.response?.data?.errors;
         if (errors) {

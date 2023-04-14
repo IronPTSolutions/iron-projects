@@ -30,7 +30,7 @@ function StudentsLogin() {
 
   return (
     <>
-      {location?.state?.student?.active === false && <div className="alert alert-info">You must active your account before login, please check your inbox</div>}
+      {location?.state?.student?.confirm === false && <div className="alert alert-info">You must active your account before login, please check your inbox</div>}
       <form onSubmit={handleSubmit(onLoginSubmit)}>
         {serverError && <div className="alert alert-danger d-none d-lg-block">{serverError}</div>}
         <div className="input-group mb-1">
