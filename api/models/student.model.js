@@ -61,6 +61,10 @@ const studentSchema = new Schema(
       type: String,
       required: "Student image url is required",
       match: [/^https?:\/\/.+\.(jpg|jpeg|png)$/, "Image URL must be valid"],
+      default: function () {
+        const match = this.githubUrl.match(/^https?:\/\/(www\.)?github.com\/(?<user>[\w.-]+)/);
+        return `https://github.com/${match.groups.user}.png`
+      }
     },
     cohort: {
       type: mongoose.Schema.Types.ObjectId,

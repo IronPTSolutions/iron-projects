@@ -23,6 +23,7 @@ app.use("/api/v1", api);
 app.use((req, res, next) => next(createError(404, "Route not found")));
 
 app.use((error, req, res, next) => {
+  console.error(error);
   if (error instanceof mongoose.Error.ValidationError) {
     error = createError(400, error);
   } else if (
@@ -32,8 +33,9 @@ app.use((error, req, res, next) => {
     const resourceName = error.model().constructor.modelName;
     error = createError(404, `${resourceName} not found`);
   } else if (error.message.includes("E11000")) {
-    // Duplicate key
-    error = createError(409, "Duplicated");
+    // Duplicate keys
+    Object.keys(error.keyValue).forEach((key) => error.keyValue[key] = 'Already exists');
+    error = createError(409, { errors: error.keyValue });
   } else if (!error.status) {
     error = createError(500, error);
   }
@@ -44,7 +46,6 @@ app.use((error, req, res, next) => {
   };
 
   if (error.errors) {
-    console.log('Tiene Errors')
     const errors = Object.keys(error.errors).reduce((errors, errorKey) => {
       errors[errorKey] = error.errors[errorKey]?.message || error.errors[errorKey];
       return errors;

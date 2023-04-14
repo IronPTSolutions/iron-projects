@@ -2,14 +2,18 @@ import React, { useContext } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthStore'
 
+import logo from '../../assets/img/logo.svg'
+
 const renderNavLinkClassName = ({ isActive }) => isActive ? 'nav-link active' : 'nav-link'
 
 function Navbar() {
   const { user, logout } = useContext(AuthContext);
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
       <div className="container">
-        <Link className='navbar-brand' to="/">Navbar w/ text</Link>
+        <Link className='navbar-brand' to="/">
+          <img src={logo} alt="Iron Projects" width="30" height="30" />
+        </Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
