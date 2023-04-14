@@ -9,13 +9,11 @@ module.exports.toggle = (req, res, next) => {
   Like.findOne(params)
     .then((like) => {
       if (like) {
-        Like.deleteOne({ _id: like.id })
+        return Like.deleteOne({ _id: like.id })
           .then(() => res.status(204).send())
-          .catch(next);
       } else {
-        Like.create(params)
+        return Like.create(params)
           .then((like) => res.json(like))
-          .catch(next);
       }
     })
     .catch(next);

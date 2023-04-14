@@ -3,6 +3,8 @@ const createError = require("http-errors");
 const mailer = require("../config/mailer.config");
 const jwt = require("jsonwebtoken");
 
+const studentConfirmationRequired = process.env.USER_CONFIRMATION_REQUIRED === "true";
+
 module.exports.list = (req, res, next) => {
   Student.find() // TODO: filters
     .populate("projects")
@@ -13,7 +15,9 @@ module.exports.list = (req, res, next) => {
 module.exports.create = (req, res, next) => {
   Student.create(req.body)
     .then((student) => {
-      mailer.sendConfirmationEmail(student);
+      if (studentConfirmationRequired) {
+        mailer.sendConfirmationEmail(student);
+      }
       res.status(201).json(student);
     })
     .catch(next);
@@ -49,9 +53,7 @@ module.exports.confirm = (req, res, next) => {
 
   req.student
     .save()
-    .then((student) => {
-      res.redirect(`${process.env.WEB_URL}/login`);
-    })
+    .then(() => res.redirect(`${process.env.WEB_URL}/login`))
     .catch(next);
 };
 
@@ -59,16 +61,16 @@ module.exports.login = (req, res, next) => {
   Student.findOne({ username: req.body.username })
     .then((student) => {
       if (!student) {
-        return next(createError(401, "Invalid credentials"));
+        return next(createError(401, { errors: { password: 'Invalid credentials' }}));
       }
 
       if (!student.confirm) {
-        return next(createError(401, "Please confirm your account"));
+        return next(createError(401, { errors: { username: 'Please confirm your account' } }));
       }
 
       student.checkPassword(req.body.password).then((match) => {
         if (!match) {
-          return next(createError(401, "Invalid credentials"));
+          return next(createError(401, { errors: { password: 'Invalid credentials' } }));
         }
 
         // module 2: req.session.id = student.id;
@@ -78,7 +80,7 @@ module.exports.login = (req, res, next) => {
           process.env.JWT_SECRET
         );
 
-        res.json({ token });
+        res.json({ token, ...student.toJSON() });
       });
     })
     .catch(next);

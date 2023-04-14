@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const Schema = mongoose.Schema;
 
+
 const studentSchema = new Schema(
   {
     name: {
@@ -16,12 +17,12 @@ const studentSchema = new Schema(
     },
     confirm: {
       type: Boolean,
-      default: false,
+      default: process.env.USER_CONFIRMATION_REQUIRED === "false",
     },
     username: {
       type: String,
-      required: "Student username is required",
-      minlength: [3, "Student name needs at least 3 chars"],
+      required: "Username is required",
+      minlength: [3, "Username needs at least 3 chars"],
       match: [/^[a-z0-9]+$/, "Username must be lowercase and without spaces"],
       lowercase: true,
       unique: true,
@@ -35,11 +36,7 @@ const studentSchema = new Schema(
       type: String,
       required: "Student bio is required",
     },
-    skills: [
-      {
-        type: String,
-      },
-    ],
+    skills: [String],
     githubUrl: {
       type: String,
       required: "Student githubUrl is required",

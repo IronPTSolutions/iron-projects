@@ -1,6 +1,12 @@
 const Cohort = require("../models/cohort.model");
 const createError = require("http-errors");
 
+module.exports.create = (req, res, next) => {
+  Cohort.create(req.body)
+    .then((cohort) => res.json(cohort))
+    .catch(next);
+};
+
 module.exports.list = (req, res, next) => {
   Cohort.find() // TODO: filters
     .populate("students")

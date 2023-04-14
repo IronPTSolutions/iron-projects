@@ -69,6 +69,7 @@ router.delete("/students/:id", secure.auth, students.delete);
 router.post("/login", students.login);
 
 router.get("/cohorts", cohorts.list);
+router.post("/cohorts", cohorts.create);
 router.get("/cohorts/:id", cohorts.detail);
 
 module.exports = router;

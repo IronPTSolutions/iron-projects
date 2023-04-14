@@ -44,8 +44,9 @@ app.use((error, req, res, next) => {
   };
 
   if (error.errors) {
+    console.log('Tiene Errors')
     const errors = Object.keys(error.errors).reduce((errors, errorKey) => {
-      errors[errorKey] = error.errors[errorKey].message;
+      errors[errorKey] = error.errors[errorKey]?.message || error.errors[errorKey];
       return errors;
     }, {});
     data.errors = errors;
