@@ -4,5 +4,5 @@ const list = () => http.get('/cohorts')
   .then((res) => res.data)
 
 export default {
-  list
+  list,
 }

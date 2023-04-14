@@ -5,5 +5,5 @@ const list = () => http.get('/projects')
 
 
 export default {
-  list
+  list,
 }
