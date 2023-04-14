@@ -1,34 +1,52 @@
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useState, useEffect } from 'react';
+import { useForm, Controller } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import studentsService from '../../../services/students';
+import cohortsService from '../../../services/cohorts';
+import Select from 'react-select';
+import moment from 'moment';
 
 function StudentsForm() {
   // https://react-hook-form.com/get-started#Applyvalidation
-  const { register, handleSubmit, setError, formState: { errors } } = useForm({ mode: 'onBlur' });
+  const { register, handleSubmit, control, setError, formState: { errors } } = useForm({ mode: 'onBlur' });
   const [serverError, setServerError] = useState(undefined);
   const navigate = useNavigate();
 
-  const onStudentSubmit = (student) => {
-    setServerError(undefined);
-    console.log('Registering...')
-    studentsService.create(student)
-      .then(student => {
-        console.log(student);
-        navigate('/login', { state: { student } });
-      })
-      .catch(error => {
-        const errors = error.response?.data?.errors;
-        if (errors) {
-          console.error(error.message, errors);
-          Object.keys(errors)
-            .forEach((inputName) => setError(inputName, { message: errors[inputName] }))
-        } else {
-          console.error(error);
-          setServerError(error.message)
-        }
-      })
+  const [cohorts, setCohorts] = useState([]);
+  const cohortSelectOptions = cohorts.map(cohort => ({ value: cohort.id, label: `${cohort.location} - ${moment(cohort.start).format('YY-MM')}` }))
+
+  const onStudentSubmit = async (student) => {
+   
+    try {
+      setServerError(undefined);
+      console.debug('Registering...')
+      student = await studentsService.create(student);
+      navigate('/login', { state: { student } });
+    } catch (error) {
+      const errors = error.response?.data?.errors;
+      if (errors) {
+        console.error(error.message, errors);
+        Object.keys(errors)
+          .forEach((inputName) => setError(inputName, { message: errors[inputName] }))
+      } else {
+        console.error(error);
+        setServerError(error.message);
+      }
+    }
   }
+
+  useEffect(() => {
+    async function fetchCohorts() {
+      try {
+        const cohorts = await cohortsService.list();
+        setCohorts(cohorts);
+      } catch (error) {
+        console.error(error);
+        setServerError(error.message);
+      }
+    }
+    fetchCohorts();
+  }, [])
 
   return (
     <form onSubmit={handleSubmit(onStudentSubmit)}>
@@ -170,12 +188,31 @@ function StudentsForm() {
         <div className="col-md-6">
           <div className="input-group mb-1">
             <span className="input-group-text"><i className='fa fa-book fa-fw'></i></span>
-            <input
-              type="text"
-              className={`form-control ${errors.cohort ? 'is-invalid' : ''}`}
-              placeholder="Cohort" {...register('cohort', {
+
+            {/* hook form controller: https://react-hook-form.com/api/usecontroller/controller/ */}
+            {/* react-select: https://react-select.com/home#getting-started */}
+            <Controller
+              control={control}
+              name="cohort"
+              rules={{
                 required: 'Student cohort is required'
-              })} />
+              }}
+              render={({ field: { onChange, value, ref } }) => (
+                <Select
+                  inputRef={ref}
+                  className={`form-control p-0 ${errors.cohort ? 'is-invalid' : ''}`}
+                  options={cohortSelectOptions}
+                  styles={{
+                    control: (baseStyles, state) => ({
+                      ...baseStyles,
+                      border: 'none',
+                    }),
+                  }}
+                  value={cohortSelectOptions.find(option => option.value === value)}
+                  onChange={option => onChange(option.value)}
+                />
+              )}
+            />
             {errors.cohort && <div className='invalid-feedback'>{errors.cohort?.message}</div>}
           </div>
         </div>
