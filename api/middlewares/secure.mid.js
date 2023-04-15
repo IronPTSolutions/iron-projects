@@ -27,6 +27,7 @@ module.exports.auth = (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     Student.findById(decoded.sub)
+      .populate("projects")
       .then((student) => {
         if (student) {
           req.user = student;

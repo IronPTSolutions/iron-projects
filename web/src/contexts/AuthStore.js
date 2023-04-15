@@ -9,6 +9,11 @@ function AuthStore({ children }) {
 
   const handleUserChange = (user) => {
     console.log('Updating user context', user);
+    if (!user) {
+      localStorage.removeItem('user-access-token');
+    } else {
+      localStorage.setItem('user-access-token', user.token);
+    }
     setUser(user);
   }
 

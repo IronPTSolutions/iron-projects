@@ -25,7 +25,7 @@ function Navbar() {
           <ul className="navbar-nav mb-2 mb-lg-0">
             {(user?.email) ? (
               <>
-                <li className="nav-item"><NavLink to="/profile" className={renderNavLinkClassName}>{user.email}</NavLink></li>
+                <li className="nav-item"><NavLink to="/students/me" className={renderNavLinkClassName}>{user.email}</NavLink></li>
                 <li className="nav-item"><button className='nav-link' onClick={() => logout()}>Logout</button></li>
               </>
             ) : (

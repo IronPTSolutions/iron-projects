@@ -14,7 +14,7 @@ function StudentsForm() {
 
   const [cohorts, setCohorts] = useState([]);
   const cohortSelectOptions = cohorts.map(cohort => ({ value: cohort.id, label: `${cohort.location} - ${moment(cohort.start).format('YY-MM')}` }));
-  console.debug(`Select cohort is: ${watch('cohort')}`);
+  console.debug(`Selected cohort is: ${watch('cohort')}`);
 
   const onStudentSubmit = async (student) => {
     try {
@@ -173,7 +173,7 @@ function StudentsForm() {
         {/* LOCATION */}
         <div className="col-md-6">
           <div className="input-group">
-            <span className="input-group-text"><i className='fa fa-linkedin fa-fw'></i></span>
+            <span className="input-group-text"><i className='fa fa-globe fa-fw'></i></span>
             <input
               type="text"
               className={`form-control ${errors.location ? 'is-invalid' : ''}`}
@@ -183,6 +183,7 @@ function StudentsForm() {
             {errors.location && <div className='invalid-feedback'>{errors.location?.message}</div>}
           </div>
         </div>
+
 
         {/* COHORT */}
         <div className="col-md-6">
@@ -210,7 +211,7 @@ function StudentsForm() {
                     }),
                   }}
                   value={cohortSelectOptions.find(option => option.value === value)}
-                  onChange={option => onChange(option.value)}
+                  onChange={(option) => onChange(option.value)}
                 />
               )}
             />

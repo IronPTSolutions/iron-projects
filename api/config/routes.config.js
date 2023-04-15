@@ -61,7 +61,7 @@ router.delete(
 
 router.get("/students", students.list);
 router.post("/students", students.create);
-router.get("/students/:id", studentsMid.exists, students.detail);
+router.get("/students/:id", secure.auth, studentsMid.exists, students.detail);
 router.get("/students/:id/confirm", studentsMid.exists, students.confirm);
 router.patch("/students/:id", secure.auth, students.update);
 router.delete("/students/:id", secure.auth, students.delete);
