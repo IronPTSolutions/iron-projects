@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import projectsService from '../../../services/projects';
 import ProjectItem from '../project-item/ProjectItem';
+import { useSearchParams } from 'react-router-dom';
 
 function ProjectsList() {
+  const [searchParams] = useSearchParams();
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    projectsService.list()
+    const query = {}
+    const cohort = searchParams.get('cohort');
+    if (cohort) query.cohort = cohort;
+
+    projectsService.list(query)
       .then((projects) => setProjects(projects))
       .catch(error => console.error(error))
-  }, []);
+  }, [searchParams]);
 
   return (
     <>

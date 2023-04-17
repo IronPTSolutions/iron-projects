@@ -1,7 +1,12 @@
 const Project = require("../models/project.model");
 
 module.exports.list = (req, res, next) => {
-  Project.find() // TODO: filters
+  const { cohort } = req.query;
+  
+  const criterial = {};
+  if (cohort) criterial.cohort = cohort;
+
+  Project.find(criterial) // TODO: filters
     .populate("comments authors cohort")
     .then((projects) => res.json(projects))
     .catch(next);

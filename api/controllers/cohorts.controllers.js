@@ -10,6 +10,7 @@ module.exports.create = (req, res, next) => {
 module.exports.list = (req, res, next) => {
   Cohort.find() // TODO: filters
     .populate("students")
+    .sort({ start: -1 })
     .then((cohorts) => res.json(cohorts))
     .catch(next);
 };

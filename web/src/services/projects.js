@@ -1,6 +1,6 @@
 import http from './base-api';
 
-const list = () => http.get('/projects')
+const list = (query) => http.get('/projects', { params: query })
   .then((res) => res.data);
 
 const detail = (id) => http.get(`/projects/${id}`)
