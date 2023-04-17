@@ -6,8 +6,12 @@ const list = (query) => http.get('/projects', { params: query })
 const detail = (id) => http.get(`/projects/${id}`)
   .then((res) => res.data);
 
+const create = (project) => http.post('/projects', project)
+  .then((res) => res.data);
+
 
 export default {
   list,
   detail,
+  create,
 }
