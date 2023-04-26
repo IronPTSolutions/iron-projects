@@ -1,0 +1,63 @@
+[
+  {
+    "name": "Carlos del Prado",
+    "email": "carlos@example.org",
+    "confirm": true,
+    "username": "pradomota",
+    "password": "12345678",
+    "bio": "Hi there! This is a super interesting bio",
+    "skills": ["js", "scala"],
+    "githubUrl": "https://github.com/pradomota",
+    "linkedinUrl": "https://linkedin.com/in/pradomota",
+    "location": "London",
+    "cohort": "2022-11-01T00:00:00.000Z"
+  },
+  {
+    "name": "Julio García",
+    "email": "julio@example.org",
+    "confirm": true,
+    "username": "juliog",
+    "password": "12345678",
+    "bio": "Hi there! This is a super interesting bio",
+    "skills": [
+      "js",
+      "ruby"
+    ],
+    "githubUrl": "https://github.com/juliog",
+    "linkedinUrl": "https://linkedin.com/in/juliog",
+    "location": "Sevilla",
+    "cohort": "2022-11-01T00:00:00.000Z"
+  },
+  {
+    "name": "Cristian Arranz",
+    "email": "cristian@example.org",
+    "confirm": true,
+    "username": "cristian",
+    "password": "12345678",
+    "bio": "Hi there! This is a super interesting bio",
+    "skills": [
+      "js",
+      "react"
+    ],
+    "githubUrl": "https://github.com/cristian",
+    "linkedinUrl": "https://linkedin.com/in/cristian",
+    "location": "Madrid",
+    "cohort": "2022-11-01T00:00:00.000Z"
+  },
+  {
+    "name": "John Doe",
+    "email": "john.dow@example.org",
+    "confirm": true,
+    "username": "johndoe",
+    "password": "12345678",
+    "bio": "Hi there! This is a super interesting bio",
+    "skills": [
+      "js",
+      "react"
+    ],
+    "githubUrl": "https://github.com/johndoe",
+    "linkedinUrl": "https://linkedin.com/in/johndoe",
+    "location": "Madrid",
+    "cohort": "2022-11-01T00:00:00.000Z"
+  }
+]

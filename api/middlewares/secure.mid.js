@@ -41,3 +41,13 @@ module.exports.auth = (req, res, next) => {
     next(createError(401, err));
   }
 };
+
+module.exports.checkRole = (role) => {
+  return (req, res, next) => {
+    if (req.user.role === role) {
+      next();
+    } else {
+      next(createError(403, "Forbidden access"));
+    }
+  }
+}

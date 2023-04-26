@@ -9,6 +9,8 @@ import ProjectPage from "./pages/ProjectPage";
 import StudentPage from "./pages/StudentPage";
 import PrivateRoute from "./guards/PrivateRoute";
 import CreateProjectPage from "./pages/CreateProjectPage";
+import Error403Page from "./pages/Error403Page";
+import CreateCohortPage from "./pages/CreateCohortPage";
 
 function App() {
   return (
@@ -23,6 +25,9 @@ function App() {
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/projects/:projectId" element={<ProjectPage />} />
           <Route path="/students/:studentId" element={<PrivateRoute><StudentPage /></PrivateRoute>} />
+          <Route path="/create-cohort" element={<PrivateRoute role="teacher"><CreateCohortPage /></PrivateRoute>} />
+
+          <Route path="/403" element={<Error403Page />} />
         </Routes>
         
         <Footer />

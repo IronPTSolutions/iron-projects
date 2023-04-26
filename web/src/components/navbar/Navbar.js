@@ -22,6 +22,7 @@ function Navbar() {
             <li className="nav-item"><NavLink to="/" className={renderNavLinkClassName}>Home</NavLink></li>
             <li className="nav-item"><NavLink to="/projects" className={renderNavLinkClassName}>Projects</NavLink></li>
             { user?.email && <li className="nav-item"><NavLink to="/create-project" className={renderNavLinkClassName}>Create Project</NavLink></li> }
+            { user?.email && user.role === 'teacher' && <li className="nav-item"><NavLink to="/create-cohort" className={renderNavLinkClassName}>Create Cohort</NavLink></li> }
           </ul>
           <ul className="navbar-nav mb-2 mb-lg-0">
             {(user?.email) ? (

@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const Schema = mongoose.Schema;
 
+const TEACHERS_EMAILS = process.env.TEACHERS_EMAILS?.split(',').map(email => email.trim()) || [];
+const TAS_EMAILS = process.env.TAS_EMAILS?.split(',').map(email => email.trim()) || [];
 
 const studentSchema = new Schema(
   {
@@ -71,6 +73,11 @@ const studentSchema = new Schema(
       ref: "Cohort",
       required: "Student cohort is required",
     },
+    role: {
+      type: String,
+      enum: ["teacher", "ta", "student"],
+      default: "student"
+    }
   },
   {
     timestamps: true,
@@ -89,6 +96,14 @@ const studentSchema = new Schema(
 
 studentSchema.pre("save", function (next) {
   const student = this;
+
+  if (TEACHERS_EMAILS.includes(student.email)) {
+    student.role = 'teacher';
+  } else if (TAS_EMAILS.includes(student.email)) {
+    student.role = 'ta';
+  } else {
+    student.role = 'student';
+  }
 
   if (student.isModified("password")) {
     bcrypt
