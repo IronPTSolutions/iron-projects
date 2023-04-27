@@ -5,6 +5,8 @@ import studentsService from '../../../services/students';
 import cohortsService from '../../../services/cohorts';
 import Select from 'react-select';
 import moment from 'moment';
+import GooglePlacesAutocomplete, { geocodeByPlaceId, getLatLng } from 'react-google-places-autocomplete';
+
 
 function StudentsForm() {
   // https://react-hook-form.com/get-started#Applyvalidation
@@ -15,11 +17,13 @@ function StudentsForm() {
   const [cohorts, setCohorts] = useState([]);
   const cohortSelectOptions = cohorts.map(cohort => ({ value: cohort.id, label: `${cohort.location} - ${moment(cohort.start).format('YY-MM')}` }));
   console.debug(`Selected cohort is: ${watch('cohort')}`);
+  console.debug(`Selected location is: ${watch('location')}`);
 
   const onStudentSubmit = async (student) => {
     try {
       setServerError(undefined);
       console.debug('Registering...')
+      student.location = student.location.location;
       student = await studentsService.create(student);
       navigate('/login', { state: { student } });
     } catch (error) {
@@ -174,12 +178,28 @@ function StudentsForm() {
         <div className="col-md-6">
           <div className="input-group">
             <span className="input-group-text"><i className='fa fa-globe fa-fw'></i></span>
-            <input
-              type="text"
-              className={`form-control ${errors.location ? 'is-invalid' : ''}`}
-              placeholder="Madrid" {...register('location', {
+            
+            <Controller
+              control={control}
+              name="location"
+              rules={{
                 required: 'Student location is required'
-              })} />
+              }}
+              render={({ field: { onChange, value, ref } }) => (
+                <GooglePlacesAutocomplete
+                  ref={ref}
+                  selectProps={{
+                    value: value?.result,
+                    onChange: async (result) => {
+                      const places = await geocodeByPlaceId(result.value.place_id);
+                      const { lat, lng } = await getLatLng(places[0]);
+                      onChange({ result, location: { address: result.label, coordinates: [lat, lng] }});
+                    },
+                  }}
+                />
+              )}
+            />
+
             {errors.location && <div className='invalid-feedback'>{errors.location?.message}</div>}
           </div>
         </div>

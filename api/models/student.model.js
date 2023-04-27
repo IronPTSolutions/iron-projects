@@ -55,9 +55,26 @@ const studentSchema = new Schema(
         "Linkedin URL must be valid",
       ],
     },
+    address: String,
     location: {
-      type: String,
-      required: "Student location is required",
+      type: new Schema({
+        type: {
+          type: String,
+          enum: ['Point'],
+          required: true
+        },
+        coordinates: {
+          type: [Number],
+          required: true
+        }
+      }),
+      validate: {
+        validator: function (location) {
+          console.log(this);
+          return this.address != undefined && location.coordinates?.length > 0;
+        },
+        message: 'Location is required'
+      }
     },
     imageUrl: {
       type: String,
@@ -88,6 +105,11 @@ const studentSchema = new Schema(
         ret.id = ret._id;
         delete ret._id;
         delete ret.password;
+        ret.location = {
+          address: ret.address,
+          coordinates: ret.location.coordinates
+        }
+        delete ret.address;
         return ret;
       },
     },
@@ -130,6 +152,8 @@ studentSchema.virtual("projects", {
   foreignField: "authors", // TODO
   justOne: false,
 });
+
+studentSchema.index({ location: '2dsphere' });
 
 const Student = mongoose.model("Student", studentSchema);
 module.exports = Student;

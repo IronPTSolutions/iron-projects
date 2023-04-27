@@ -13,6 +13,13 @@ module.exports.list = (req, res, next) => {
 };
 
 module.exports.create = (req, res, next) => {
+  const { location } = req.body;
+  req.body.address = location?.address;
+  req.body.location = {
+    type: 'Point',
+    coordinates: location?.coordinates?.reverse(),
+  }
+
   Student.create(req.body)
     .then((student) => {
       if (studentConfirmationRequired) {
