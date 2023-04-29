@@ -185,9 +185,8 @@ function StudentsForm() {
               rules={{
                 required: 'Student location is required'
               }}
-              render={({ field: { onChange, value, ref } }) => (
+              render={({ field: { onChange, value } }) => (
                 <GooglePlacesAutocomplete
-                  ref={ref}
                   selectProps={{
                     value: value?.result,
                     onChange: async (result) => {
