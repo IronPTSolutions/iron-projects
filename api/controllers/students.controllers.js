@@ -4,6 +4,7 @@ const mailer = require("../config/mailer.config");
 const jwt = require("jsonwebtoken");
 
 const studentConfirmationRequired = process.env.USER_CONFIRMATION_REQUIRED === "true";
+const maxSessionTime = parseInt(process.env.MAX_SESSION_TIME) || 3_600;
 
 module.exports.list = (req, res, next) => {
   Student.find() // TODO: filters

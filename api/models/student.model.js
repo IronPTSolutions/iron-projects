@@ -106,8 +106,8 @@ const studentSchema = new Schema(
         delete ret._id;
         delete ret.password;
         ret.location = {
-          address: ret.address,
-          coordinates: ret.location.coordinates
+          address: ret.address || '',
+          coordinates: ret.location?.coordinates || []
         }
         delete ret.address;
         return ret;
