@@ -2,9 +2,10 @@ const Student = require("../models/student.model");
 const createError = require("http-errors");
 const mailer = require("../config/mailer.config");
 const jwt = require("jsonwebtoken");
+const moment = require('moment');
 
 const studentConfirmationRequired = process.env.USER_CONFIRMATION_REQUIRED === "true";
-const maxSessionTime = parseInt(process.env.MAX_SESSION_TIME) || 3_600;
+const MAX_SESSION_DAYS = parseInt(process.env.MAX_SESSION_DAYS || 1);
 
 module.exports.list = (req, res, next) => {
   Student.find() // TODO: filters
@@ -84,7 +85,7 @@ module.exports.login = (req, res, next) => {
         // module 2: req.session.id = student.id;
 
         const token = jwt.sign(
-          { sub: student.id, exp: Date.now() / 1000 + 3_600 }, // 1h duration
+          { sub: student.id, exp: moment().add(MAX_SESSION_DAYS, 'days').valueOf() / 1000 }, // 1h duration
           process.env.JWT_SECRET
         );
 
